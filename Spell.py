@@ -5,9 +5,15 @@ class Spell(object)
         self.description = data["description"]
         self.maxrank = int(data["maxrank"])
         self.cooldown = float(data["cooldown"])
-        self.effect = data["effect"]
+        if("effect" in data):
+            self.effect = data["effect"]
+        else:
+            self.effect = None
         self.costType = data["costType"]
-        self.vars = data["vars"]
+        if("vars" in data):
+            self.vars = data.vars
+        else:
+            self.vars = None
         self.cost = data["cost"]
 
     def getName(self):
