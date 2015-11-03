@@ -1,6 +1,17 @@
-def getSpellScore(s, AP, AD, CDR):
 
-def getSpellDamage(s,AP,AD,CDR):
+from CaseHandler import *
+
+def getSpellScore(s, AP, AD, CDR):
+    damage = getSpellDamage()
+    cooldown = getSpellCooldown()
+    score = 0
+    if "mana" or "energy" in s.getCostType().lower():
+        if float((s.getCost()[s.getMaxRank()-1]) > 0 and cooldown > 0):
+            score = damage/cooldown
+    score = handleScoreCases(s)
+    return score
+
+def getSpellDamage(s,AP,AD):
     return spellHasDamage(s)*(getBaseDamage(s)+ getVariableDamage(s,AP,AD))
 
 def getBaseDamage(s):
@@ -38,6 +49,6 @@ def getVariableDamage(s,AP,AD):
 
 
 def getSpellCooldown(s,CDR):
-    cooldown = (1-CDR)*s.getCooldown()
-    cooldown = handleCooldownCases(s, cooldown)
+    cooldown = (1-CDR)*(s.getCooldown())[s.getMaxRank()-1]
+    cooldown = handleCooldownCases(s, cooldown, CDR)
     return cooldown
