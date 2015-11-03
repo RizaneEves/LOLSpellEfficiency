@@ -1,5 +1,7 @@
 
 from CaseHandler import *
+from Spell import *
+from Champion import *
 
 def getSpellScore(s, AP, AD, CDR):
     damage = getSpellDamage()
@@ -52,3 +54,24 @@ def getSpellCooldown(s,CDR):
     cooldown = (1-CDR)*(s.getCooldown())[s.getMaxRank()-1]
     cooldown = handleCooldownCases(s, cooldown, CDR)
     return cooldown
+
+def getHighestScore(data, AP, AD, CDR):
+    for key in data["keys"]:
+        c = Champion(data["data"], key)
+        highScore = 0
+        highSpell = None
+        highChampion = None
+        for s in c.getSpells():
+            spell = Spell(s)
+            currScore = getSpellScore(spell, AP, AD, CDR)
+            if(currScore > highScore):
+                highScore = currScore
+                highSpell = Spell(s)
+                highChampion = c
+    print("Your results have been calculated based on: " + AP + " AP, " + AD + " AD, " + CDR*100 + "% CDR.")
+    print("Result: ")
+    print("Champion: " + highChampion.getName())
+    print("Spell: " + highSpell.getName())
+    print("Spell description: " + highSpell.getDescription())
+    print("Reason: This spell has achieved a high score of: " + highScore + ".")
+
