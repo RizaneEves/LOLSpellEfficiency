@@ -1,0 +1,27 @@
+import json
+import urllib2
+from Calculation import *
+
+def readAP():
+    AP = input("Ability Power (enter a number) : ")
+    return float(AP)
+
+def readAD():
+    AD = input("Attack Damage (enter a number) : ")
+    return float(AD)
+
+def readCDR():
+
+    CDR = input("Cooldown Reduction (enter a decimal) : ")
+    return float(CDR)
+
+
+
+AP = readAP()
+AD = readAD()
+CDR = readCDR()
+
+URL = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=all&api_key=8e8904b4-c112-4b0f-bd1e-641649d9e569"
+data = json.load(urllib2.urlopen(URL))
+
+getHighestScore(data, AP, AD, CDR)
