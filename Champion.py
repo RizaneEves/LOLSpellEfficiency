@@ -1,7 +1,7 @@
-class Champion(object)
-    def _init_(self, data, key):
-        self.name = data[key]["name"]
-        self.spells = data[key]["spells"]
+class Champion:
+    def __init__(self, data, key):
+        self.name = data["keys"][key]
+        self.spells = data["data"][self.name]["spells"]
 
     def getName(self):
         return self.name
