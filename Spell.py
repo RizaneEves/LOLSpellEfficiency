@@ -1,11 +1,10 @@
-from ImageHandler import getSpellImage
+
 
 
 class Spell:
     def __init__(self, data):
         self.name = data["name"]
         self.key = data["key"]
-        self.image = getSpellImage(key)
         self.description = data["description"]
         self.maxrank = int(data["maxrank"])
         self.cooldown = data["cooldown"]
@@ -25,9 +24,6 @@ class Spell:
 
     def getKey(self):
         return self.key
-
-    def getImage(self):
-        return self.image
 
     def getDescription(self):
         return self.description
