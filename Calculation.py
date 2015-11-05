@@ -78,9 +78,10 @@ def getHighestScore(data, AP, AD, CDR):
             print(str(currScore))
             if currScore > highScore:
                 highScore = currScore
-                highSpell = spell.getName()
+                highSpell = spell.getKey()
                 highChampion = c.getName()
                 highSpellDesc = spell.getDescription()
+
     print(
         "Your results have been calculated based on: " + str(AP) + " AP, " + str(AD) + " AD, " + str(
             CDR * 100) + "% CDR.")
@@ -89,3 +90,4 @@ def getHighestScore(data, AP, AD, CDR):
     print("Spell: " + highSpell)
     print("Spell description: " + highSpellDesc)
     print("Reason: This spell has achieved a high score of: " + str(highScore) + ".")
+    return [highChampion, highSpell, highSpellDesc]
