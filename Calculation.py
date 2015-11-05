@@ -64,7 +64,8 @@ def getSpellCooldown(s, CDR):
 def getHighestScore(data, AP, AD, CDR):
     highScore = 0
     highChampion = ""
-    highSpell = ""
+    highSpellKey = ""
+    highSpellName = ""
     highSpellDesc = ""
 
     for key in data["keys"]:
@@ -78,7 +79,8 @@ def getHighestScore(data, AP, AD, CDR):
             print(str(currScore))
             if currScore > highScore:
                 highScore = currScore
-                highSpell = spell.getKey()
+                highSpellKey = spell.getKey()
+                highSpellName = spell.getName()
                 highChampion = c.getName()
                 highSpellDesc = spell.getDescription()
 
@@ -87,7 +89,7 @@ def getHighestScore(data, AP, AD, CDR):
             CDR * 100) + "% CDR.")
     print("Result: ")
     print("Champion: " + highChampion)
-    print("Spell: " + highSpell)
+    print("Spell: " + highSpellName)
     print("Spell description: " + highSpellDesc)
-    print("Reason: This spell has achieved a high score of: " + str(highScore) + ".")
-    return [highChampion, highSpell, highSpellDesc]
+    reason = "Reason: This spell has achieved a high score of: " + str(highScore) + "."
+    return [highChampion, highSpellName, highSpellKey, highSpellDesc, reason]
