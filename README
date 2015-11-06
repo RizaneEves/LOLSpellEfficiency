@@ -1,0 +1,44 @@
+-- Description --
+A program that calculates the most efficient spell given certain amounts of AP, AD and CDR.
+
+-- Instructions --
+1. Make sure Python 2.7 is installed.
+2. Run GUI.py. If it doesn't run, that means some libraries it uses aren't installed.
+
+Here's a list of libraries used:
+json
+urllib2
+Pillow
+Tkinter
+requests
+StringIO
+
+
+
+--Assumptions--
+Many assumptions were made in the process of making this program.
+
+1. A "spell" is assumed to be one that costs Mana or Energy (all other spells are disregarded)
+2. Efficiency is calculated with a very simple equation that is not necessarily accurate: (Total damage / Cooldown)
+3. Many factors that cannot necessarily be determined from the Riot API were ignored, such as damage over time, AOE, and CC's.
+4. A spell is assumed to do damage if it contains a variable that has the word "damage" in it.
+5. There were some special cases of spells which are handled separately, even though not all possible special cases are handled.
+   See Spell Assumptions below.
+6. Efficiency of a spell is calculated based on the spell's max rank.
+
+
+--Spell Assumptions--
+1. Since Teemo's R shrooms have a cooldown of 0.25 seconds, and do massive amounts of damage, they received a high efficiency score.
+   However, only a few shrooms can be placed at once, and the recharge time is 22 seconds, so the cooldown was hard wired to 22 seconds.
+2. Vi's E, although it holds 2 charges, requires 8 seconds to recharge, and that is what has been wired to the cooldown.
+3. Kog'Maw's Living Artillery, having a very low cooldown but increasing mana cost per use with a specific recharge time,
+   has its cooldown hard wired to its recharge time because the increasing mana costs would reduce its efficiency.
+4. Karthus' Defile, as a toggle ability which requires a lot of mana, despite doing massive amounts of damage, has been hardwired
+   a score of 0 since it's cooldown is almost 0 (since it's a toggle ability) , and it is not really a spell that is cast.
+5. Soraka's W is assumed to do damage through the Riot API's perspective, even though it does not, so it has been given a score of
+   0.
+6. Xerath's Q (Arcanopulse) has received an additional cooldown of 3.0 seconds to account for the spell charge time before its release.
+
+
+7. There are many more cases that I couldn't account for, since some of the data in the Riot API is inaccurate or does not provide
+enough information.
